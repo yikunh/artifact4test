@@ -1,80 +1,77 @@
-<h1>README</h1>
-<p>Binary Similarity Manual</p>
-<h3>Directory Tree</h3>
-<pre><code>binsim/
-`-- jaccardIndex1			# executable that calculates similarity scores
-`-- qemu-x86_64				# executable that generates function signatures
-`-- analyse_time_file.txt	# txt that records the time cost for each signature generation
-`-- random.txt				# txt that stores function parameters
-`-- run-qemu-analysis.py	# script to get function signatures
-`-- run-jaccard-x64.py		# script to generate similarity report
-`-- test-binary/			# stores the binary pairs to test
-`-- ...						
-</code></pre>
-<h3>How To Analysis</h3>
-<p>We have already prepared data produced by ida pro.<br></p>
-<ol>
-<li>
-<p>To get the function signatures of the programs:</p>
-<pre><code class="language-bash">python3 run-qemu-analysis-x64.py programname
-# e.g. python3 run-qemu-analysis-x64.py x64_wget_1_20_3_gcc75_O0
-</code></pre>
-<p>The result will be stored in ./programname/SigExtracted</p>
-</li>
-<li>
-<p>If you want to get the signature of a specific function</p>
-<pre><code class="language-bash">./qemu-x86_64 programname functionname
-</code></pre>
-<p>The result will be stored in ./programname/SigExtracted</p>
-</li>
-<li>
-<p>To compare the signatures between programs, create a directory first</p>
-<pre><code>foldername/
-`-- log
-</code></pre>
-<p>and then run</p>
-<pre><code class="language-bash">python3 run-jaccard-x64.py programname_O3 programmename_O0 foldername
-</code></pre>
-</li>
-<li>
-<p>To compare a specific function in functionA against functions in programB, create a directory first</p>
-<pre><code>foldername/
-`-- log
-</code></pre>
-<p>and then run</p>
-<pre><code class="language-bash">python3 run-jaccard-x64.py programname_O3 programmename_O0 foldername functionname
-</code></pre>
-</li>
-</ol>
-<h3>How To read the result</h3>
-<p>You will get the similarity report under the directory you have specified.</p>
-<pre><code>folder/
-`-- log/
-`-- distinguished_log.txt
-`-- error_result_log.txt
-`-- result_log.txt
-`-- routine_time_log.txt
-</code></pre>
-<ol>
-<li>
-<p>result_log.txt</p>
-<p>This file records the similarity score between the same function but from differenct elfs(e.g. function acpt_write from x64_openssl_1_1_1g_gcc75_O0 and x64_openssl_1_1_1g_gcc75_O3)<br>
-At the end of this file, an overall summary is recorded, which includes the number of functions in both programs, the correct number, precision and rankX rate(explained in distinguish_log.txt).</p>
-</li>
-<li>
-<p>error_result_log.txt</p>
-<p>This file records the false possitives and their corresponding similarity scores</p>
-</li>
-<li>
-<p>distinguish_log.txt</p>
-<p>This file records the true possitives.For each function in programA, we record all the functions in functionB that has the same similarities(also the highest) in this file. We calculate rankX,  the ratio of function pairs among all the true possitives where functionA has less than X most similar functions in programB.</p>
-</li>
-<li>
-<p>routine_time_log.txt</p>
-<p>This file records the time cost of comparing each function in programA with all the functions in programB</p>
-</li>
-<li>
-<p>log/</p>
-<p>This directory stores the similarity scores between each function in programA and all the functions in programB.</p>
-</li>
-</ol>
+<!DOCTYPE html><html><head><title>BinCrypto: Binary Cryptographic Function Identification via Similarity Analysis with Path-insensitive Emulation</title><meta charset='utf-8'><link href='https://cdn.maxiang.io/res-min/themes/marxico.css' rel='stylesheet'><style></style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+<p></p>
+
+
+
+<h3 id="bincrypto-binary-cryptographic-function-identification-via-similarity-analysis-with-path-insensitive-emulation">BinCrypto: Binary Cryptographic Function Identification via Similarity Analysis with Path-insensitive Emulation</h3>
+
+<p>Here is the artifact of BinCrypto. It is provided as a Docker image based on Linux, containing the sample binaries and compiled executables of BinCrypto’s prototype. The file tree of the prototype is:</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs gherkin"><div class="hljs-line">|<span class="hljs-string">--- binCrypto/</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- bin/                         # the directory of binaries</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- x64_libcl347_gcc114_O0</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- x64_libcl347_gcc114_O3</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- ...</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- data/                        # the directory of binaries' preprocess data</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- x64_libcl347_gcc114_O0/</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- x64_libcl347_gcc114_O3/</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- ...</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- script/                      # the directory of Python scripts</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- comparingBinaries.py    # for similarity comparison</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- emulatingBinary.py      # for binary emulation</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- signatures/                  # the directory of extracted code features</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- output/                      # the directory of similarity scores</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- comparison                   # the executable to compare two binaries for similarity scores</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- emulation                    # the executable to emulate one binary for code features</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- random.txt                   # the random input values for emulation</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- Dockerfile                   # the configuration file for Docker</span>
+</div></code></pre>
+
+<h4 id="0-start-with-the-docker-image">0. Start with the Docker Image</h4>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-bash hljs"><div class="hljs-line">docker pull clarapop/bincrypto:latest
+</div><div class="hljs-line">docker run --name bincrypto -it clarapop/bincrypto:latest
+</div></code></pre>
+
+<ul><li><p>Then, it is under the root path of the prototype.</p></li>
+</ul>
+
+
+
+<h4 id="1-emulate-the-sample-binaries-of-x64libcl347gcc114o3-and-x64libcl347gcc114o0">1. Emulate the Sample Binaries of x64_libcl347_gcc114_O3 and x64_libcl347_gcc114_O0</h4>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-bash hljs"><div class="hljs-line"><span class="hljs-comment"># emulate to extract function signatures</span>
+</div><div class="hljs-line">python3 script/emulatingBinary.py x64_libcl347_gcc114_O3
+</div><div class="hljs-line">python3 script/emulatingBinary.py x64_libcl347_gcc114_O0
+</div></code></pre>
+
+<ul><li><p><strong>x64_libcl347_gcc114_O3/O0</strong> is cryptolib v3.4.7 which is compiled with GCC v11.4.0 -O3/-O0 for x64.</p></li>
+<li><p>The signature sequence of each function is recorded in the file under the path <strong>(root)/signatures/x64_libcl347_gcc114_O3/</strong> and <strong>(root)/signatures/x64_libcl347_gcc114_O0/</strong>.</p></li>
+</ul>
+
+<h4 id="2-compare-the-sample-binaries">2. Compare the Sample Binaries</h4>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-bash hljs"><div class="hljs-line"><span class="hljs-comment"># DST: x64_libcl347_gcc114_O3</span>
+</div><div class="hljs-line"><span class="hljs-comment"># SRC: x64_libcl347_gcc114_O0</span>
+</div><div class="hljs-line"><span class="hljs-comment"># compare each function signature of the DST to those of the SRC</span>
+</div><div class="hljs-line">python3 script/comparingBinaries.py x64_libcl347_gcc114_O3 x64_libcl347_gcc114_O0
+</div></code></pre>
+
+<ul><li><p>The Recall@1 and RaSoM are provided after finishing the comparison along with the processing time.</p></li>
+<li><p>The results of similarity scores are under the path <strong>(root)/output/x64_libcl347_gcc114_O3_x64_libcl347_gcc114_O0/</strong></p>
+
+<ul>
+<li><p>Each file is named as that of a DST function.</p></li>
+<li><p>Each line of a file is SRC function and the similarity score with the DST function.</p></li></ul></li>
+</ul></div></body></html>
