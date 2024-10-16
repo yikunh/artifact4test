@@ -13,23 +13,25 @@
 
 
 <pre class="prettyprint hljs-dark"><code class="hljs gherkin"><div class="hljs-line">|<span class="hljs-string">--- binCrypto/</span>
-</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- bin/                         # the directory of binaries</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- bin/                                                  # the directory of binaries</span>
 </div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- x64_libcl347_gcc114_O0</span>
 </div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- x64_libcl347_gcc114_O3</span>
 </div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- ...</span>
-</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- data/                        # the directory of binaries' preprocess data</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- data/                                                 # the directory of binaries' preprocess data</span>
 </div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- x64_libcl347_gcc114_O0/</span>
 </div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- x64_libcl347_gcc114_O3/</span>
 </div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- ...</span>
-</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- script/                      # the directory of Python scripts</span>
-</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- comparingBinaries.py    # for similarity comparison</span>
-</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- emulatingBinary.py      # for binary emulation</span>
-</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- signatures/                  # the directory of extracted code features</span>
-</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- output/                      # the directory of similarity scores</span>
-</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- comparison                   # the executable to compare two binaries for similarity scores</span>
-</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- emulation                    # the executable to emulate one binary for code features</span>
-</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- random.txt                   # the random input values for emulation</span>
-</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- Dockerfile                   # the configuration file for Docker</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- script/                                               # the directory of Python scripts</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- signatures/                                           # the directory of extracted code features</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- x64_libcl347_gcc114_O0/</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- x64_libcl347_gcc114_O3/</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- ...</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- output/                                               # the directory of similarity scores</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- x64_libcl347_gcc114_O3_x64_libcl347_gcc114_O0/</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- comparison                                            # the executable to compare two binaries for similarity scores</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- emulation                                             # the executable to emulate one binary for code features</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- random.txt                                            # the random input values for emulation</span>
+</div><div class="hljs-line"><span class="hljs-string"></span>|<span class="hljs-string">    </span>|<span class="hljs-string">--- Dockerfile                                            # the configuration file for Docker</span>
 </div></code></pre>
 
 <h4 id="0-start-with-the-docker-image">0. Start with the Docker Image</h4>
