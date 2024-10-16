@@ -38,8 +38,8 @@
 
 
 
-<pre class="prettyprint hljs-dark"><code class="language-bash hljs"><div class="hljs-line">docker pull tracyjames/bincrypto:latest
-</div><div class="hljs-line">docker run --name bincrypto -it tracyjames/bincrypto:latest
+<pre class="prettyprint hljs-dark"><code class="language-bash hljs"><div class="hljs-line">$ docker pull tracyjames/bincrypto:latest
+</div><div class="hljs-line">$ docker run --name bincrypto -it tracyjames/bincrypto:latest
 </div></code></pre>
 
 <ul><li><p>Then, it is under the root path of the prototype.</p></li>
@@ -50,8 +50,8 @@
 
 
 <pre class="prettyprint hljs-dark"><code class="language-bash hljs"><div class="hljs-line"><span class="hljs-comment"># emulate to extract function signatures</span>
-</div><div class="hljs-line">python3 script/emulate_binary.py x64_libcl347_gcc114_O3
-</div><div class="hljs-line">python3 script/emulate_inary.py x64_libcl347_gcc114_O0
+</div><div class="hljs-line">$ python3 script/emulate_binary.py x64_libcl347_gcc114_O3
+</div><div class="hljs-line">$ python3 script/emulate_inary.py x64_libcl347_gcc114_O0
 </div></code></pre>
 
 <ul><li><p><strong>x64_libcl347_gcc114_O3/O0</strong> is cryptolib v3.4.7 which is compiled with GCC v11.4.0 -O3/-O0 for x64.</p></li>
@@ -65,7 +65,7 @@
 <pre class="prettyprint hljs-dark"><code class="language-bash hljs"><div class="hljs-line"><span class="hljs-comment"># REF: x64_libcl347_gcc114_O0</span>
 </div><div class="hljs-line"><span class="hljs-comment"># TAR: x64_libcl347_gcc114_O3</span>
 </div><div class="hljs-line"><span class="hljs-comment"># compare each function signature of the TAR to those of the REF</span>
-</div><div class="hljs-line">python3 script/compare_binaries.py x64_libcl347_gcc114_O3 x64_libcl347_gcc114_O0
+</div><div class="hljs-line">$ python3 script/compare_binaries.py x64_libcl347_gcc114_O3 x64_libcl347_gcc114_O0
 </div></code></pre>
 
 <ul><li><p>The results of similarity scores are under the path <strong>(root)/output/x64_libcl347_gcc114_O3VSx64_libcl347_gcc114_O0/</strong></p>
